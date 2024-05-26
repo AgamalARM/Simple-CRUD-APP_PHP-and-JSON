@@ -5,8 +5,9 @@ $users = getUsers();
 include 'partials/header.php' ;
 ?>
 
-
-    <table border="3">
+<div class="container">
+    
+ <table border="3">
         <thead>
             <tr>
                 <th>Name</th>
@@ -25,7 +26,11 @@ include 'partials/header.php' ;
                 <td><?php echo $user['username']?></td>
                 <td><?php echo $user['email']?></td>
                 <td><?php echo $user['phone']?></td>
-                <td><?php echo $user['website']?></td>
+                <td>
+                    <a href="http://<?php echo $user['website']?>" target="_blank">
+                        <?php echo $user['website']?>
+                    </a>
+                </td>
                 <td>
                     <a href="view.php?id=<?php echo $user["id"] ?>" class= "btn btn-sm btn-outline-info">View</a>
                     <a href="update.php?id=<?php echo $user["id"] ?>" class= "btn btn-sm btn-outline-secondary">Update</a>
@@ -36,5 +41,6 @@ include 'partials/header.php' ;
         </tbody>
     </table>
     
+</div>
 
 <?php  include 'partials/footer.php' ?>
