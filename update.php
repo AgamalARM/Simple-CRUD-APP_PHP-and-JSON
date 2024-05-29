@@ -15,14 +15,26 @@ if (!$user) {
     exit;
 }
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    updateUser($_POST,$userId);
+    $user = updateUser($_POST,$userId);
     if (isset($_FILES['picture'])) {
+        if (!is_dir("users/images")) { // check Is images dir made or not?
+            mkdir("users/images");
+        }
+        // Get the file extension from the filename
+        $fileName = $file['name'];
+        // Search for the dot in the filename
+        $dotPosition = strpos($fileName, '.');
+        // Take the substring from the dot position till the end of the string
+        $extension = substr($fileName, $dotPosition + 1);
         move_uploaded_file($_FILES['picture']["tmp_name"], "users/images/$userId.jpg");
+        
+        $user['extension'] = $extension ;
+        updateUser($user, $userId);
     }
 
 
 
-    //header("Location: index.php");
+    header("Location: index.php");
 }
 
 

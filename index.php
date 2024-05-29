@@ -6,10 +6,12 @@ include 'partials/header.php' ;
 ?>
 
 <div class="container">
+    <a class="btn btn-success" href="createUser.php">Create New User</a>
     
- <table border="3">
+ <table>
         <thead>
             <tr>
+                <th>Image</th>
                 <th>Name</th>
                 <th>User Name</th>
                 <th>Email</th>
@@ -22,6 +24,11 @@ include 'partials/header.php' ;
         <tbody>
             <?php foreach ($users as $user) : ?>
             <tr>
+                <td>
+                    <?php if (isset ($user['extension'])): ?>
+                        <img style="width: 60px" src="<?php echo "users/images/${user['id']}.jpg"?>" >
+                    <?php endif; ?>
+                </td>
                 <td><?php echo $user['name']?></td>
                 <td><?php echo $user['username']?></td>
                 <td><?php echo $user['email']?></td>
@@ -36,7 +43,9 @@ include 'partials/header.php' ;
                     <a href="update.php?id=<?php echo $user["id"] ?>" class= "btn btn-sm btn-outline-secondary">Update</a>
                     <a href="delete.php?id=<?php echo $user["id"] ?>" class= "btn btn-sm btn-outline-danger">Delete</a>
                 </td>
+                
             </tr>
+            
             <?php endforeach;; ?>
         </tbody>
     </table>

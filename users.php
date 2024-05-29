@@ -1,7 +1,7 @@
 <?php
 function getUsers () {
 
-    return json_decode(file_get_contents('./users.json'),true); 
+    return json_decode(file_get_contents('users/users.json'),true); 
 }
 
 function getUserById ($id) {
@@ -18,13 +18,16 @@ function createUser ($data){
 
 }
 function updateUser ($data, $id){
+    $updateUser = [];
     $users = getUsers();
     foreach ($users as $i => $user) {
         if ($user['id'] == $id ) {
-            $users[$i] = array_merge($user, $data);
+            $users[$i] = $updateUser = array_merge($user, $data);
         }
     }
-    file_put_contents('./users.json', json_encode($users));
+    file_put_contents('users/users.json', json_encode($users, JSON_PRETTY_PRINT));
+
+    return $updateUser;
 
 }
 
